@@ -32,6 +32,60 @@ speed_profile = {
   ["default"] = 10
 }
 
+-- surface/trackype/smoothness speeds was estimated from
+-- looking the the photos at the relevant wiki pages
+surface_speed = {
+  ["asphalt"] = 200,
+  ["concrete"] = 200,
+  ["concrete:plates"] = 200,
+  ["concrete:lanes"] = 200,
+  ["paved"] = 200,
+
+  ["metal"] = 100,
+  ["bricks"] = 100,
+  ["cement"] = 100,
+
+  ["compacted"] = 80,
+  ["paving_stones"] = 80,
+  ["fine_gravel"] = 80,
+
+  ["grass"] = 40,
+  ["wood"] = 40,
+  ["sett"] = 40,
+  ["grass_paver"] = 40,
+  ["gravel"] = 40,
+  ["unpaved"] = 40,
+  ["ground"] = 40,
+  ["dirt"] = 40,
+  ["pebblestone"] = 40,
+  ["tartan"] = 40,
+
+  ["cobblestone"] = 30,
+  ["clay"] = 30,
+  ["earth"] = 20,
+
+  ["stone"] = 20,
+  ["rocky"] = 20,
+  ["sand"] = 20,
+
+  ["mud"] = 10
+}
+tracktype_speed = {
+  ["grade1"] =  60,
+  ["grade2"] =  40,
+  ["grade3"] =  30,
+  ["grade4"] =  25,
+  ["grade5"] =  20
+}
+smoothness_speed = {
+  ["intermediate"]    =  80,
+  ["bad"]             =  40,
+  ["very_bad"]        =  20,
+  ["horible"]         =  10,
+  ["very_horible"]    =  5,
+  ["impassable"]      =  0
+}
+
 local take_minimum_of_speeds  = false
 local obey_oneway 			      = true
 local obey_bollards           = true
@@ -180,6 +234,21 @@ function way_function (way)
       max_speed = math.huge
     end
     way.speed = min(way.speed, max_speed)
+  end
+
+  -- reduce speed on bad surfaces
+  local surface = way.tags:Find("surface")
+  local tracktype = way.tags:Find("tracktype")
+  local smoothness = way.tags:Find("smoothness")
+
+  if surface and surface_speed[surface] then
+    way.speed = math.min(surface_speed[surface], way.speed)
+  end
+  if tracktype and tracktype_speed[tracktype] then
+    way.speed = math.min(tracktype_speed[tracktype], way.speed)
+  end
+  if smoothness and smoothness_speed[smoothness] then
+    way.speed = math.min(smoothness_speed[smoothness], way.speed)
   end
 
   if -1 == way.speed then
