@@ -69,35 +69,35 @@ Feature: Car - Surfaces
             | -1     | grade5    | very_bad   | mud      |      | x     |
             | -1     | nonsense  | nonsense   | nonsense |      | x     |
 
-    @todo
-    Scenario: Car - Tracktypes should reduce speed
+        @todo
+        Scenario: Car - Tracktypes should reduce speed
         Then routability should be
-            | highway     | tracktype | => | speed   | 
-            | motorway    |           |    | 90 km/h |
-            | motorway    | grade1    |    | 60 km/h |
-            | motorway    | grade2    |    | 40 km/h |
-            | motorway    | grade3    |    | 30 km/h |
-            | motorway    | grade4    |    | 25 km/h |
-            | motorway    | grade5    |    | 20 km/h |
-            | tertiary    |           |    | 60 km/h |
-            | tertiary    | grade1    |    | 60 km/h |
-            | tertiary    | grade2    |    | 40 km/h |
-            | tertiary    | grade3    |    | 30 km/h |
-            | tertiary    | grade4    |    | 25 km/h |
-            | tertiary    | grade5    |    | 20 km/h |
-            | residential |           |    | 25 km/h |
-            | residential | grade1    |    | 25 km/h |
-            | residential | grade2    |    | 25 km/h |
-            | residential | grade3    |    | 25 km/h |
-            | residential | grade4    |    | 25 km/h |
-            | residential | grade5    |    | 20 km/h |
+            | highway     | tracktype | forw    | 
+            | motorway    |           | 90 km/h |
+            | motorway    | grade1    | 60 km/h |
+            | motorway    | grade2    | 40 km/h |
+            | motorway    | grade3    | 30 km/h |
+            | motorway    | grade4    | 25 km/h |
+            | motorway    | grade5    | 20 km/h |
+            | tertiary    |           | 60 km/h |
+            | tertiary    | grade1    | 60 km/h |
+            | tertiary    | grade2    | 40 km/h |
+            | tertiary    | grade3    | 30 km/h |
+            | tertiary    | grade4    | 25 km/h |
+            | tertiary    | grade5    | 20 km/h |
+            | residential |           | 25 km/h |
+            | residential | grade1    | 25 km/h |
+            | residential | grade2    | 25 km/h |
+            | residential | grade3    | 25 km/h |
+            | residential | grade4    | 25 km/h |
+            | residential | grade5    | 20 km/h |
 
     @todo
     Scenario: Car - Combination of surface tags should use lowest speed
         Then routability should be
-            | highway     | tracktype | surface | smoothness | => | speed   | 
-            | motorway    |           |         |            |    | 90 km/h |
-            | service     | grade1    | asphalt | excellent  |    | 15 km/h |
-            | motorway    | grade5    | asphalt | excellent  |    | 20 km/h |
-            | motorway    | grade1    | mud     | excellent  |    | 10 km/h |
-            | motorway    | grade1    | asphalt | horrible   |    | 10 km/h |
+            | highway     | tracktype | surface | smoothness | forw    | 
+            | motorway    |           |         |            | 90 km/h |
+            | service     | grade1    | asphalt | excellent  | 15 km/h |
+            | motorway    | grade5    | asphalt | excellent  | 20 km/h |
+            | motorway    | grade1    | mud     | excellent  | 10 km/h |
+            | motorway    | grade1    | asphalt | horrible   | 10 km/h |
