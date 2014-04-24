@@ -64,7 +64,7 @@ When a max speed is set, osrm will use 2/3 of that as the actual speed.
             | runway    |         |        |          | 100              |                   |       |
             | runway    |         |        |          |                  | 100               |       |
 
-    Scenario: Car - Don't follow link when main road has a typical maxspeed
+    Scenario: Car - Don't follow link when main road has a reasonable maxspeed
         Given the node map
             | a |   |  |   |   |   | e |
             |   | b |  |   |   | d |   |
@@ -72,7 +72,7 @@ When a max speed is set, osrm will use 2/3 of that as the actual speed.
 
         And the ways
             | nodes | highway       | maxspeed |
-            | abcde | motorway      | 90       |
+            | abcde | motorway      | 60       |
             | bd    | motorway_link |          |
 
 
