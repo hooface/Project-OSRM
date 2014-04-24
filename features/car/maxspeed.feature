@@ -63,3 +63,30 @@ When a max speed is set, osrm will use 2/3 of that as the actual speed.
             | runway    |         |        | 100      |                  |                   |       |
             | runway    |         |        |          | 100              |                   |       |
             | runway    |         |        |          |                  | 100               |       |
+
+    Scenario: Car - Don't follow links instead of motorways with typical maxspeeds
+        Given the node map
+            | a | b |  |   |   | c | d |
+            |   |   |  | s |   |   |   |
+            |   |   |  |   |   |   |   |
+            | e | f |  |   |   | g | h |
+            |   |   |  | t |   |   |   |
+            |   |   |  |   |   |   |   |
+            | i | j |  |   |   | k | l |
+            |   |   |  | u |   |   |   |
+
+        And the ways
+            | nodes | highway       | maxspeed |
+            | abcd  | motorway      |          |
+            | bsc   | motorway_link |          |
+            | efgh  | motorway      | 90       |
+            | ftg   | motorway_link |          |
+            | ijkl  | motorway      | 45       |
+            | juk   | motorway_link |          |
+
+
+        When I route I should get
+            | from | to | route         | speed       |
+            | a    | d  | abcd          | 90 km/h +-1 |
+            | e    | h  | efgh          | 59 km/h +-1 |
+            | i    | l  | ijkl,juk,ijkl | 37 km/h +-1 |
